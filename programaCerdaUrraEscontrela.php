@@ -5,8 +5,21 @@ include_once("tateti.php");
 /***** DATOS DE LOS INTEGRANTES *******/
 /**************************************/
 
-/* Apellido, Nombre. Legajo. Carrera. mail. Usuario Github */
-/* ... COMPLETAR ... */
+/* Escontrela Manuel
+* Legajo: 
+* mail: 
+* Usuario GitHub: 
+*******************
+* Cerda Marcos 
+* Legajo: 
+* mail: 
+* Usuario GitHUb: 
+*******************
+* Urra Juan Pablo
+* Legajo: FAI-3730
+* mail: jpablo.urra@est.fai.uncoma.edu.ar
+* Usuario GitHub: UrraPablo*/
+
 
 
 
@@ -15,8 +28,11 @@ include_once("tateti.php");
 /**************************************/
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
+/** Esta funcion realiza la precraga de datos de 10 juegos del TATETI */
 
+/** @return array */
 function cargarJuegos (){
+    // COMO PONEMOS LAS VARIABLES INTERNAS??
     $coleccionJuegos = array();
     $coleccionJuegos[1] =array ("jugadorCruz"=> "cacho" , "jugadorCirculo" => "pepe", "puntosCruz"=> 5, "puntosCirculo" => 0);
     $coleccionJuegos[2] =array ("jugadorCruz"=> "carlo" , "jugadorCirculo" => "cacho", "puntosCruz"=> 1, "puntosCirculo" => 1);
@@ -33,6 +49,8 @@ function cargarJuegos (){
     }
     
 
+/** Esta funcion devuelve la opcion que ingresa el usuario en el juego TATETI */
+/** @return int opcionElegida */
 
 function seleccionarOpcion(){
       
@@ -55,7 +73,117 @@ function seleccionarOpcion(){
         return $opcionElegida;
     
 }
+//funcion/es de  mostrar juego aqui
 
+
+// funcion/es de mostrar el primer juego ganado aqui
+/** Esta funcion determina el numero del primer juego ganado
+ * por un jugador.
+ */
+/** @param array juego
+ *  @param string nombreJugador
+ *  @return int
+ */
+function primerJuegoGanado($juego, $nombreJugador){
+    // BOOLEAN: bandera, seEncontro, esJugador, ganoX
+    //INT: i
+
+    // inicializacion de variables
+    $indice = -1; // en caso que no gane el jugador  
+
+    for($i = 0; $i < count($juego); $i++) { // recorrido por indice de un array multidimensional
+            foreach($juego[$i] as $key => $value){ // recorre cada juego del array       
+                $bandera=true;
+                $seEncontro=($nombreJugador==$value); // determina si se encontro el jugador con ese nombre
+                $esJugadorX=($key=="jugadorX"); // determina si el jugador eligio X u O 
+                $ganoX=$juego[$i]["ptosX"] > $juego[$i]["ptosCirculo"];
+                while($seEncontro && $bandera){ // recorrido parcial del array
+                    if($esJugadorX){
+                        if($ganoX){
+                            $indice=$i;
+        
+                        }
+        
+                    }//fin if
+                    else{
+                        if(!$ganoX){
+                            $indice=$i;
+        
+                        }
+                         
+        
+                    }//fin else
+        
+                    //$indice = $i;
+                    $bandera=false; 
+        
+                }// fin while
+            }// fin foreach
+           
+        }// fin for
+
+        return $indice; 
+}// fin function 
+
+/** Esta funcion determina el simbolo del primer juego ganado de un jugador.
+ * utiliza el retorno de la funcion primerJuegoGanado, para recuperar el simbolo.
+ * 
+ */
+/** @param array juego
+ *  @param int indice
+ *  @return string 
+ */
+function simboloGanador($juego, $indice){
+    // BOOLEAN: bandera
+
+    // inicializacion de variables 
+    $bandera=true; 
+
+    while($indice<>-1 && $bandera==true){
+    $bandera = false;
+    if($juego[$indice]["ptosX"] > $juego[$indice]["ptosCirculo"]){
+        $simbolo = "X";
+
+    }// fin if 
+    else{
+        $simbolo = "O";
+
+    }//fin else
+    }// fin while 
+    
+    return $simbolo; 
+
+}// fin function
+
+// funcion/es de porcentaje de juegos ganados aqui
+
+// funcion/es de resumen de juego aqui
+
+// funcion/es de mostrar listado de juegos ordenados por jugador O aqui
+
+// FUNCIONES DE LA EXPLICACION 3 (PUEDEN IR JUNTO CONLAS FUNCIONES DEL MENU)
+
+/** Esta funcion calcula la cantidad de juegos ganados (sin importar el simbolo elegido) */
+/** @param array juego
+ *  @return int 
+ */
+function juegosGanados($juego){
+// INT: j   BOOLEAN: gano_o , gano_x
+
+// inicializacion de variables 
+$cantGanados =0;
+for ($j=0; $j<count($juego); $j++){
+        $gano_x=$juego[$j]["ptosX"] > $juego[$j]["ptosCirculo"];
+        $gano_o=$juego[$j]["ptosX"] < $juego[$j]["ptosCirculo"];
+        if($gano_o || $gano_x){
+            $cantGanados=$cantGanados+1;
+        }// fin if
+
+}// fin for
+return $cantGanados;
+
+
+}// fin function 
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
