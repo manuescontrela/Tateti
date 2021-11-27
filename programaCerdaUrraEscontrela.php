@@ -30,7 +30,7 @@ include_once("tateti.php");
 /**************************************/
 
 // FUNCIONES DE LA EXPLICACION 3 (PUEDEN IR JUNTO CONLAS FUNCIONES DEL MENU)
-//*******************************INCISO1****************************************************************************************************/
+//*******************************INCISO01****************************************************************************************************/
 /** Esta funcion realiza la precraga de datos de 10 juegos del TATETI */
 
 /** @return array */
@@ -51,7 +51,7 @@ function cargarJuegos (){
     return $coleccionJuegos;
     }
     
-//*******************************INCISO2****************************************************************************************************/
+//*******************************INCISO02****************************************************************************************************/
 
 /** Esta funcion devuelve la opcion que ingresa el usuario en el juego TATETI */
 /** @return int */
@@ -77,13 +77,13 @@ function seleccionarOpcion(){
         return $opcionElegida;
     
 }
-//*******************************INCISO3****************************************************************************************************/
+//*******************************INCISO03****************************************************************************************************/
 //Implementar una función que solicite al usuario un número entre un rango de valores. 
 //Si el número ingresado por el usuario no es válido, la función se encarga de volver a pedirlo. 
 //La función retorna un número válido.
 
 
-//*******************************INCISO4****************************************************************************************************/
+//*******************************INCISO04****************************************************************************************************/
 //funcion/es de  mostrar juego (muestra juego solicitado por la opción 2 del menu)
 /** @param int numJuego 
  */
@@ -122,12 +122,33 @@ echo "MOSTRAR JUEGO \n";
     echo"El número de juego ingresado es inexistente";
 
 }
-//*******************************INCISO5****************************************************************************************************/
+//*******************************INCISO05****************************************************************************************************/
 //Implementar una función agregarJuego cuya entrada en la colección de juegos y un juego,
 // y la función retorna la colección modificada al agregarse el nuevo juego.
 
+/**
+ * @return array
+ */
 
-//*******************************INCISO6****************************************************************************************************/
+$sumarJuego= cargarJuegos();{ //declaracíon de variable que invoca colección
+    //Inicializamos variables con valores tomados de tateti.php
+    $cruz=$nombreJugadorCruz;
+    $circ=$nombreJugadorCirculo;
+    $puntosX=$puntosCruz;
+    $puntos0=$$puntosCirculo;
+
+    //cargar nuevo juego a la colección
+    $nuevoJuego =array ("jugadorCruz"=> "$jCruz" , "jugadorCirculo" => "$jCirc", "puntosCruz"=> $pCruz, "puntosCirculo" =>$pCirc);
+    array_push($sumarJuego, $nuevoJuego);
+    //print_r($sumarJuego);
+    return $sumarJuego;
+   
+        
+    }
+
+
+
+//*******************************INCISO06****************************************************************************************************/
 // funcion/es de mostrar el primer juego ganado aqui
 /** Esta funcion determina el numero del primer juego ganado
  * por un jugador.
@@ -209,7 +230,7 @@ function simboloGanador($juego, $indice){
 }// fin function
 
 
-/**************************************INCISO7**************************************************************/
+/**************************************INCISO07**************************************************************/
 //Implementar una función que dada la colección de juegos y el nombre de un jugador, 
 //retorne el resumen del jugador utilizando la estructura 
 //b) de la sección EXPLICACACIÓN 2.
@@ -220,7 +241,21 @@ function simboloGanador($juego, $indice){
 //Implementar una función sin parámetros formales que solicite al usuario un símbolo X o O, y retorne el símbolo elegido. 
 //La función debe validar el datos ingresado por el usuario (Utilice funciones predefinidas de string).
 
-
+function simboloElegido(){
+    $condicion = true;
+    while ($condicion==true){
+    echo "ingrese simbolo: ";
+    $simbolo = strtoupper(trim(fgets(STDIN)));
+    if ($simbolo=="X" ||$simbolo== "O"){
+    $condicion=false;
+    } else {
+    $condicion=true;
+    }
+    }
+    return ($simbolo);
+    }
+    
+    
 
 /****************************************INCISO09************************************************************/
 // funcion/es de mostrar listado de juegos ordenados por jugador O aqui
@@ -242,6 +277,7 @@ function juegosGanados($juego){
     
     }// fin for
     return $cantGanados;
+    
 }// fin function 
 
 /**************************************INCISO10**************************************************************/
@@ -300,6 +336,8 @@ case 5:
         break;
 case 6:
     echo " MOSTRAR LISTADO DE JUEGOS ORDENADO POR JUGADOR 0 (CIRCULO) \n";
+
+    
         break;
 case 7://Salir
     echo "EXIT \n";
