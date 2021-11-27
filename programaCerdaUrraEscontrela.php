@@ -241,6 +241,9 @@ function simboloGanador($juego, $indice){
 //Implementar una función sin parámetros formales que solicite al usuario un símbolo X o O, y retorne el símbolo elegido. 
 //La función debe validar el datos ingresado por el usuario (Utilice funciones predefinidas de string).
 
+/** 
+ *  @return string
+ */
 function simboloElegido(){
     $condicion = true;
     while ($condicion==true){
@@ -277,13 +280,17 @@ function juegosGanados($juego){
     
     }// fin for
     return $cantGanados;
-    
+
 }// fin function 
 
 /**************************************INCISO10**************************************************************/
 //Implementar una función que dada una colección de juegos y un símbolo (X o O) 
 //retorne la cantidad de juegos ganados por el símbolo ingresado por parámetro.
 
+/** 
+ *  @param $juego
+ *  @return float 
+ */
 $partidas = count(cargarJuegos);
 $porcentGanados=0;
 function PorcentajeGanador($juego){
@@ -293,14 +300,14 @@ function PorcentajeGanador($juego){
         for ($j=0; $j<count($juego); $j++){
             $gano_x=$juego[$j]["ptosX"] > $juego[$j]["ptosCirculo"];
             $porcentGanados=(($porcentGanados+1)/$partidas)*100;
-            $porcentGanado = "el simbolo X gano un $porcentGanados % de los juegos"
+            $porcentGanado = "el simbolo X gano un $porcentGanados % de los juegos";
         }
     }
         else {
         for ($j=0; $j<count($juego); $j++){
             $gano_o=$juego[$j]["ptosX"] < $juego[$j]["ptosCirculo"];
             $porcentGanados=(($porcentGanados+1)/$partidas)*100;
-            $porcentGanados= "el simbolo O gano un $porcentGanados % de los juegos"
+            $porcentGanados= "el simbolo O gano un $porcentGanados % de los juegos";
         }
     }
     return $porcentGanados;
