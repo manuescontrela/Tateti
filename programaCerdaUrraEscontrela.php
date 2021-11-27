@@ -284,10 +284,27 @@ function juegosGanados($juego){
 //Implementar una función que dada una colección de juegos y un símbolo (X o O) 
 //retorne la cantidad de juegos ganados por el símbolo ingresado por parámetro.
 
-
-
-
-
+$partidas = count(cargarJuegos);
+$porcentGanados=0;
+function PorcentajeGanador($juego){
+    echo "Eliga el simbolo: ";
+    $simbolo = trim(fgets(STDIN));
+    if ($simbolo=="X"){
+        for ($j=0; $j<count($juego); $j++){
+            $gano_x=$juego[$j]["ptosX"] > $juego[$j]["ptosCirculo"];
+            $porcentGanados=(($porcentGanados+1)/$partidas)*100;
+            $porcentGanado = "el simbolo X gano un $porcentGanados % de los juegos"
+        }
+    }
+        else {
+        for ($j=0; $j<count($juego); $j++){
+            $gano_o=$juego[$j]["ptosX"] < $juego[$j]["ptosCirculo"];
+            $porcentGanados=(($porcentGanados+1)/$partidas)*100;
+            $porcentGanados= "el simbolo O gano un $porcentGanados % de los juegos"
+        }
+    }
+    return $porcentGanados;
+}
 
 
 /**************************************INCISO11**************************************************************/
