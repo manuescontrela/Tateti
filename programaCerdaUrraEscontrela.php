@@ -18,7 +18,7 @@ include_once("tateti.php");
 * Urra Juan Pablo
 * Legajo: FAI-3730
 * mail: jpablo.urra@est.fai.uncoma.edu.ar
-* Usuario GitHub: UrraPablo*/
+* Usuario GitHub: UrraPablo */
 
 
 
@@ -35,7 +35,7 @@ include_once("tateti.php");
 
 /** @return array */
 function cargarJuegos (){
-    // COMO PONEMOS LAS VARIABLES INTERNAS??
+    
     $coleccionJuegos = array();
     $coleccionJuegos[1] =array ("jugadorCruz"=> "cacho" , "jugadorCirculo" => "pepe", "puntosCruz"=> 5, "puntosCirculo" => 0);
     $coleccionJuegos[2] =array ("jugadorCruz"=> "carlo" , "jugadorCirculo" => "cacho", "puntosCruz"=> 1, "puntosCirculo" => 1);
@@ -57,7 +57,7 @@ function cargarJuegos (){
 /** @return int */
 
 function seleccionarOpcion(){
-      
+      // INT: opcionElegida
     do{
         echo "--------------------------------------------------------------\n";
         echo "INGRESE NÚMERO DE OPCIÓN:\n";
@@ -73,7 +73,6 @@ function seleccionarOpcion(){
         $opcionElegida= trim(fgets(STDIN));
         
     }WHILE ($opcionElegida <0 & $opcionElegida > 8);  
-    
         return $opcionElegida;
     
 }
@@ -83,16 +82,18 @@ function seleccionarOpcion(){
 //La función retorna un número válido.
 
 
+
 //*******************************INCISO04****************************************************************************************************/
-//funcion/es de  mostrar juego (muestra juego solicitado por la opción 2 del menu)
+// Esta funcion función muestra los datos de un numero de juego especificado por el usuario
 /** @param int numJuego 
+ *  @param array game
  */
 
-function mostrarJuegox($numJuego){
-
+function mostrarJuegox($numJuego,$game){
+// STRING: winner
 echo "MOSTRAR JUEGO \n";
 
-    $game = cargarjuegos();
+    //$game = cargarjuegos();
 
     if ($game[$numJuego]["puntosCruz"] > $game[$numJuego]["puntosCirculo"]){
         $winner = " (GANÓ X)";
@@ -123,8 +124,7 @@ echo "MOSTRAR JUEGO \n";
 
 }
 //*******************************INCISO05****************************************************************************************************/
-//Implementar una función agregarJuego cuya entrada en la colección de juegos y un juego,
-// y la función retorna la colección modificada al agregarse el nuevo juego.
+//Esta funcion agrega un nuevo juego a la colección de juegos previamente precargados.
 
 /**
  * @return array
@@ -149,7 +149,7 @@ $sumarJuego= cargarJuegos();{ //declaracíon de variable que invoca colección
 
 
 //*******************************INCISO06****************************************************************************************************/
-// funcion/es de mostrar el primer juego ganado aqui
+
 /** Esta funcion determina el numero del primer juego ganado
  * por un jugador.
  */
@@ -158,7 +158,7 @@ $sumarJuego= cargarJuegos();{ //declaracíon de variable que invoca colección
  *  @return int
  */
 function primerJuegoGanado($juego, $nombreJugador){
-    // BOOLEAN: bandera, seEncontro, esJugador, ganoX
+    // BOOLEAN: bandera, seEncontro, esJugadorx, ganoX
     //INT: i
 
     // inicializacion de variables
@@ -215,7 +215,7 @@ function simboloGanador($juego, $indice){
 
     while($indice<>-1 && $bandera==true){
     $bandera = false;
-    if($juego[$indice]["ptosX"] > $juego[$indice]["ptosCirculo"]){
+    if($juego[$indice]["puntosCruz"] > $juego[$indice]["ptosCirculo"]){
         $simbolo = "X";
 
     }// fin if 
@@ -231,23 +231,87 @@ function simboloGanador($juego, $indice){
 
 
 /**************************************INCISO07**************************************************************/
-//Implementar una función que dada la colección de juegos y el nombre de un jugador, 
-//retorne el resumen del jugador utilizando la estructura 
-//b) de la sección EXPLICACACIÓN 2.
+// Esta funcion calcula la cantidad de juegos que ganó, empató, perdió y los puntos de un jugador
+// ingresado por el usuario
+/** @param array juego
+ *  @param string name 
+ *  @return array 
+ * */ 
+function resumeJugador($juego, $name){
+// INT: ptosGanados, ptosEmpate, cantJuegoGanado, cantPerdidos, k    BOOLEAN: bandera, empato, gano_x, gano_o
 
+// inicializacion de variables
+$ptosGanados=0;
+$ptosEmpate=0;
+$cantJuegoGanado=0;
+$cantPerdidos=0;
+$resumen=array(); 
+for ($k=0; $k < count($juego); $k++){
+    foreach($juego[$k] as $clave => $valor){
+        $bandera = true;
+    while($valor == $name && $bandera){
+        $empato=$juego[$k]["puntosCruz"] == $juego[$k]["ptosCirculo"];
+        $gano_x=$juego[$k]["puntosCruz"] > $juego[$k]["ptosCirculo"];
+        $gano_o=$juego[$k]["puntosCruz"] < $juego[$k]["ptosCirculo"];
+        $bandera=false; 
+        if($clave == "jugadorCruz"){
+            if($gano_x){
+                $ptosGanados=$ptosGanados+$juego[$k]["puntosCruz"];
+                $cantJuegoGanado=$cantJuegoGanado+1;
+
+            }//fin if
+            elseif($empato){
+                $ptosEmpate = $ptosEmpate+1 ;
+
+            }// fin esleif
+            else{
+                $cantPerdidos=$cantPerdidos+1;// no entra cuando perdio
+            } // fin else
+
+        }// fin if
+        else{ // es jugador O
+            if($gano_o){
+                $ptosGanados=$ptosGanados+$juego[$k]["ptosCirculos"];
+                $cantJuegoGanado=$cantJuegoGanado+1;
+            }// fin if 
+            elseif($empato){
+                $ptosEmpate=$ptosEmpate +1;
+
+            }//fin elseif
+            else{
+                $cantPerdidos=$cantPerdidos+1;
+
+            }// fin else
+
+        }// fin else 
+
+    }// fin while 
+}// fin foreach 
+}// fin for
+// almacenamiento de datos del juego en el array resumen 
+$resumen[0]=$cantJuegoGanado;
+$resumen[1]=$ptosGanados;
+$resumen[2]=$ptosEmpate;
+$resumen[3]=$cantPerdidos; 
+
+return $resumen; 
+
+} // fin function
 
 
 /***************************************INCISO08*************************************************************/
-//Implementar una función sin parámetros formales que solicite al usuario un símbolo X o O, y retorne el símbolo elegido. 
-//La función debe validar el datos ingresado por el usuario (Utilice funciones predefinidas de string).
+//Esta funcion evalua y devuelve el simbolo elegido por el usuario (X u O). 
 
 /** 
  *  @return string
  */
 function simboloElegido(){
+// BOOLEAN: condicion
+    // inicializacion de variables 
     $condicion = true;
+
     while ($condicion==true){
-    echo "ingrese simbolo: ";
+    echo "ingrese simbolo del juego (X u O): ";
     $simbolo = strtoupper(trim(fgets(STDIN)));
     if ($simbolo=="X" ||$simbolo== "O"){
     $condicion=false;
@@ -261,7 +325,7 @@ function simboloElegido(){
     
 
 /****************************************INCISO09************************************************************/
-// funcion/es de mostrar listado de juegos ordenados por jugador O aqui
+
 /** Esta funcion calcula la cantidad de juegos ganados (sin importar el simbolo elegido) */
 /** @param array juego
  *  @return int 
@@ -284,34 +348,60 @@ function juegosGanados($juego){
 }// fin function 
 
 /**************************************INCISO10**************************************************************/
-//Implementar una función que dada una colección de juegos y un símbolo (X o O) 
-//retorne la cantidad de juegos ganados por el símbolo ingresado por parámetro.
+// Esta funcion calcula la cantidad de juegos ganados por el simbolo (X u O), elgido por el usuario.
+/**
+ * @param array juego
+ * @param string simbolo
+ * @return int
+ */
+function juegosGanadosPorSimbolo($juego,$simbolo){
+    // INT: k, countGanados    BOOLEAN: gano_X, gano_O
 
+    //inicializacion de variables 
+    $ganadosPorSimbolo=0;
+
+    for($k=0; $k < count($juego); $k++){
+        $gano_X=$juego[$k]["puntosCruz"] > $juego[$k]["puntosCirculos"];
+        $gano_O=$juego[$k]["puntosCruz"] < $juego[$k]["puntosCirculos"];
+        if(strtoupper($simbolo)=="X"){
+            if($gano_X){
+                $ganadosPorSimbolo=$ganadosPorSimbolo+1; 
+
+            }// fin if 
+
+        }// fin if
+        elseif($gano_O){
+            $ganadosPorSimbolo = $ganadosPorSimbolo +1;
+
+        } // fin elseif
+    }// fin for 
+    return $ganadosPorSimbolo; 
+
+}// fin function
+
+/********************************PTO 4 DEL MENU**************************************************** */
+// Esta funcion calcula el porcentaje de juegos ganados por el simbolo elegido por el usuario (X u O)
 /** 
- *  @param $juego
+ *  @param array juego
+ *  @param string simbolo 
  *  @return float 
  */
-$partidas = count(cargarJuegos);
-$porcentGanados=0;
-function PorcentajeGanador($juego){
-    echo "Eliga el simbolo: ";
-    $simbolo = trim(fgets(STDIN));
-    if ($simbolo=="X"){
-        for ($j=0; $j<count($juego); $j++){
-            $gano_x=$juego[$j]["ptosX"] > $juego[$j]["ptosCirculo"];
-            $porcentGanados=(($porcentGanados+1)/$partidas)*100;
-            $porcentGanado = "el simbolo X gano un $porcentGanados % de los juegos";
-        }
-    }
-        else {
-        for ($j=0; $j<count($juego); $j++){
-            $gano_o=$juego[$j]["ptosX"] < $juego[$j]["ptosCirculo"];
-            $porcentGanados=(($porcentGanados+1)/$partidas)*100;
-            $porcentGanados= "el simbolo O gano un $porcentGanados % de los juegos";
-        }
-    }
-    return $porcentGanados;
-}
+
+function porcentajeGanador($juego,$simbolo){
+    // INT: cantGanadoSimbolo, cantJuegosGanados
+
+    // llamado a la funcion juegosGanados
+    $cantJuegosGanados=juegosGanados($juego);
+    
+    //llamado a la funcion juegosGanadosPorSimbolo
+    $cantGanadoSimbolo=juegosGanadosPorSimbolo($juego,$simbolo);
+
+    // calculo del porcentaje 
+    $porcentaje = ($cantGanadoSimbolo/$cantJuegosGanados)*100;
+
+    return $porcentaje;
+
+}// fin function
 
 
 /**************************************INCISO11**************************************************************/
@@ -325,16 +415,19 @@ function PorcentajeGanador($juego){
 /**************************************/
 
 //Declaración de variables:
+// ARRAY: juegos INT: opcion, numJuegox   FLOAT: porcentajeGanador
+// BOOLEAN:   STRING: nombreJugador
 
 //Inicialización de variables:
-//Int $juego, $opcion, $juegox, $numJuegox
+$juegos=cargarJuegos(); 
+
 
 //Proceso:
 
 //print_r($juego);
 //imprimirResultado($juego);
 
-
+//llamado a la funcion para definir que accion realiza el programa
 $opcion = seleccionarOpcion();
     
 switch ($opcion) {
@@ -346,17 +439,37 @@ case 2:
 
     echo "Ingrese número del juego que desea mostrar: \n" ;
     $numJuegox = trim(fgets(STDIN));
-    $juegox = mostrarJuegox($numJuegox);
+    mostrarJuegox($numJuegox,$juegos);
 
         break;
 case 3:
     echo "MOSTRAR EL PRIMER JUEGO GANADOR \n";
+    echo("Ingrese el nombre del jugador: \n");
+    $nombreJugador=trim(fgets(STDIN)); 
+    $nroJuego=primerJuegoGanado($juegos,$nombreJugador);
+    if($nroJuego<>-1){
+    $ganoSimbolo=simboloGanador($juegos, $nroJuego);
+    echo("****************************************");
+    echo("Juego TATETI: ".$nroJuego." (ganó ".$ganoSimbolo.")\n");
+    echo("Jugador X: ".$juegos[$nroJuego]["jugadorCruz"]." obtuvo ".$juegos[$nroJuego]["puntosCruz"]." puntos\n");
+    echo("Jugador O: ".$juegos[$nroJuego]["jugadorCirculo"]." obtuvo ".$juegos[$nroJuego]["puntosCirculo"]." puntos\n");
+    echo("****************************************");
+    }// fin if 
+    else{
+        echo("El jugador ".$nombreJugador." no ganó ningun juego\n");
+
+    }// fin else 
+
         break;
 case 4:
     echo "MOSTRAR PORCENTAJE DE JUEGOS GANADOS \n";
+    $opcionSimbolo=simboloElegido();
+    $porcentajeGanador=porcentajeGanador($juegos,$opcionSimbolo);
+    echo("El simbolo ".$opcionSimbolo." ganó el ".$porcentajeGanador."%  de los juegos");
         break;
 case 5:
     echo "MOSTRAR RESUMEN DE JUGADOR \n";
+    
         break;
 case 6:
     echo " MOSTRAR LISTADO DE JUEGOS ORDENADO POR JUGADOR 0 (CIRCULO) \n";
