@@ -127,25 +127,18 @@ echo "MOSTRAR JUEGO \n";
 //Esta funcion agrega un nuevo juego a la colección de juegos previamente precargados.
 
 /**
+ * 
  * @return array
  */
-
-$sumarJuego= cargarJuegos();{ //declaracíon de variable que invoca colección
-    //Inicializamos variables con valores tomados de tateti.php
-    $cruz=$nombreJugadorCruz;
-    $circ=$nombreJugadorCirculo;
-    $puntosX=$puntosCruz;
-    $puntos0=$$puntosCirculo;
-
-    //cargar nuevo juego a la colección
-    $nuevoJuego =array ("jugadorCruz"=> "$jCruz" , "jugadorCirculo" => "$jCirc", "puntosCruz"=> $pCruz, "puntosCirculo" =>$pCirc);
-    array_push($sumarJuego, $nuevoJuego);
-    //print_r($sumarJuego);
+function agregarJuegoNuevo(){
+    $sumarJuego= cargarJuegos(); //declaracíon de variable que invoca colección
+    $game= jugar();//Invocamos función jugar de tateti.php
+    $nuevoJuego =array ("jugadorCruz"=> $game["jugadorCruz"] , "jugadorCirculo" => $game["jugadorCirculo"], "puntosCruz"=> $game["puntosCruz"], "puntosCirculo" => $game["jugadorCruz"]);
+    array_push($sumarJuego, $nuevoJuego);//cargar nuevo juego a la colección
     return $sumarJuego;
-   
-        
+    //print_r($game);
     }
-
+    //$juegosCargados= agregarJuegoNuevo();
 
 
 //*******************************INCISO06****************************************************************************************************/
@@ -238,6 +231,7 @@ function simboloGanador($juego, $indice){
  *  @return array 
  * */ 
 function resumeJugador($juego, $name){
+    
 // INT: ptosGanados, ptosEmpate, cantJuegoGanado, cantPerdidos, k    BOOLEAN: bandera, empato, gano_x, gano_o
 
 // inicializacion de variables
@@ -518,7 +512,6 @@ case 6:
     $jugadoresCirculos=uasort($jugadoresCirculos,"sort");
 
     print_r($jugadoresCirculos); 
-
     
         break;
 case 7://Salir
