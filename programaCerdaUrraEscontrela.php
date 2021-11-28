@@ -289,10 +289,10 @@ for ($k=0; $k < count($juego); $k++){
 }// fin foreach 
 }// fin for
 // almacenamiento de datos del juego en el array resumen 
-$resumen[0]=$cantJuegoGanado;
-$resumen[1]=$ptosGanados;
-$resumen[2]=$ptosEmpate;
-$resumen[3]=$cantPerdidos; 
+$resumen[0]=$cantJuegoGanado; // juegos ganados
+$resumen[1]=$ptosGanados;     // ptos ganados   
+$resumen[2]=$ptosEmpate;      // ptos empatados  
+$resumen[3]=$cantPerdidos;    // juegos perdidos   
 
 return $resumen; 
 
@@ -405,8 +405,32 @@ function porcentajeGanador($juego,$simbolo){
 
 
 /**************************************INCISO11**************************************************************/
-//Implementar una función sin retorno que, dada una colección de juegos, 
-//muestre la colección de juegos ordenado por el nombre del jugador cuyo símbolo es O.
+//Muestra el listado de los jugadores ordenados alfabeticamente que eligiero el simbolo O
+
+/**
+ * @param array juego
+ * @return array
+ */
+function ordenarPor_O($juego){
+    //INT: k
+
+
+    for($k=0; $k <count($juego); $k++){
+        foreach($juego[$k] as $clave =>$dato){
+            if($clave=="jugadorCirculo"){
+                $jugadoresO[$k]["jugadorO"] =$dato;
+    
+            }//fin if
+    
+        }//fin foreach
+        
+    
+    }// fin for
+
+    return $jugadoresO;
+
+}// fin function 
+
 
 
 /**************************************INCISO12**************************************************************/
@@ -415,7 +439,7 @@ function porcentajeGanador($juego,$simbolo){
 /**************************************/
 
 //Declaración de variables:
-// ARRAY: juegos INT: opcion, numJuegox   FLOAT: porcentajeGanador
+// ARRAY: juegos, datos  INT: opcion, numJuegox, ptosAcumulados   FLOAT: porcentajeGanador
 // BOOLEAN:   STRING: nombreJugador
 
 //Inicialización de variables:
@@ -469,10 +493,31 @@ case 4:
         break;
 case 5:
     echo "MOSTRAR RESUMEN DE JUGADOR \n";
-    
+    $datos=resumeJugador($juegos, $nombreJugador); // el array datos contiene la informacion del juego
+    $ptosAcumulados=$datos[1] + $datos[2];
+
+    echo("***************************.\n");
+    echo("Jugador: ".strtoupper($nombre)."\n");
+    echo("Ganó: ".$datos[0]." juegos\n");
+    echo("Perdió: ".$datos[3]." juegos\n");
+    echo("Empató: ".$datos[2]." juegos\n"); 
+    echo("total puntos acumulados: ".$ptosAcumulados." puntos\n"); 
+    echo("***************************\n"); 
+
+
         break;
 case 6:
     echo " MOSTRAR LISTADO DE JUEGOS ORDENADO POR JUGADOR 0 (CIRCULO) \n";
+    // funcion de para detrminar el orden del arreglo (ascendente / descendente)
+    // en este caso lo funcion esta definida para ordenar de menor a mayor alfabeticamente
+    function sort($a,$b){
+        if($a==$b) return 0;
+        return($a < $b)?-1:1;
+    }// fin function 
+    $jugadoresCirculos=ordenarPor_O($juegos);
+    $jugadoresCirculos=uasort($jugadoresCirculos,"sort");
+
+    print_r($jugadoresCirculos); 
 
     
         break;
