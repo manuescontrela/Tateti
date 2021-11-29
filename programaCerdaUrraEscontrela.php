@@ -11,9 +11,9 @@ include_once("tateti.php");
 * Usuario GitHub: manuescontrela
 *******************
 * Cerda Marcos 
-* Legajo: 
-* mail: 
-* Usuario GitHUb: 
+* Legajo: FAI-3517
+* mail: marcos.cerda@est.fi.uncoma.edu.ar
+* Usuario GitHUb: Amadesx
 *******************
 * Urra Juan Pablo
 * Legajo: FAI-3730
