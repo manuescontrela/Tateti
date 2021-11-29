@@ -1,6 +1,8 @@
 # Tateti
 TECNICATURA SUP EN DESARROLLO WEB
+
 Trabajo Práctico final de Introducción a la Programación
+
 TRABAJO PRÁCTICO FINAL
 
 INTEGRANTES:
