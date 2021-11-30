@@ -131,20 +131,12 @@ echo "MOSTRAR JUEGO \n";
 //En este caso se utiliza la funcion predefinida array_push para insertar el array de tipo asociativo al final
 // de la coleccion de juegos
 
-/**
- * @param array juego 
- * @param array nuevoJuego
- * @return array
+
+/** nombre de la funcion:  array_push
+ * @param array  
+ * @param mixed value
+ * @return int
  */
-
-function cargarNuevoJuegos($juego,$nuevoJuego){
-    // INT: longArray
-
-    $longArray=count($juego);
-    $juego[$longArray+1]=$nuevoJuego;
-    return $juego;
-
-}// fin function 
 
 
 
