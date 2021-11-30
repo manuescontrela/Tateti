@@ -408,7 +408,6 @@ function porcentajeGanador($juego,$simbolo){
 function ordenarPor_O($juego){
     //INT: k
 
-
     for($k=0; $k <count($juego); $k++){
         foreach($juego[$k] as $clave =>$dato){
             if($clave=="jugadorCirculo"){
