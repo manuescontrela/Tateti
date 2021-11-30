@@ -123,22 +123,15 @@ echo "MOSTRAR JUEGO \n";
 
 }
 //*******************************INCISO05****************************************************************************************************/
-//Esta funcion agrega un nuevo juego a la colección de juegos previamente precargados.
+//En este caso se utiliza la funcion predefinida array_push para insertar el array de tipo asociativo al final
+// de la coleccion de juegos
 
-/**
- * @param array juego 
- * @param array nuevoJuego
- * @return array
+/** nombre de la funcion:  array_push
+ * @param array  
+ * @param mixed value
+ * @return int
  */
 
-function cargarNuevoJuegos($juego,$nuevoJuego){
-    // INT: longArray
-
-    $longArray=count($juego);
-    $juego[$longArray+1]=$nuevoJuego;
-    return $juego;
-
-}// fin function 
 
 
 
@@ -152,7 +145,7 @@ function cargarNuevoJuegos($juego,$nuevoJuego){
  *  @return int
  */
 function primerJuegoGanado($juego, $nombreJugador){
-    // BOOLEAN: bandera, seEncontro, esJugadorx, ganoX
+    // BOOLEAN: bandera, seEncontro, esJugadorx, ganoX, empatoX
     //INT: i
 
     // inicializacion de variables
@@ -226,14 +219,15 @@ function simboloGanador($juego, $indice){
 
 
 /**************************************INCISO07**************************************************************/
-// Esta funcion calcula la cantidad de juegos que ganó, empató, perdió y los puntos de un jugador
+// Esta funcion calcula la cantidad de juegos que ganó, empató, perdió y los puntos del jugador
 // ingresado por el usuario
 /** @param array juego
  *  @param string name 
  *  @return array 
  * */ 
 function resumeJugador($juego, $name){
-// INT: ptosGanados, ptosEmpate, cantJuegoGanado, cantPerdidos, k    BOOLEAN: bandera, empato, gano_x, gano_o
+// INT: ptosGanados, ptosEmpate, cantJuegoGanado, cantPerdidos, k    
+// BOOLEAN: bandera, empato, gano_x, gano_o
 
 // inicializacion de variables
 $ptosGanados=0;
@@ -350,7 +344,7 @@ function juegosGanados($juego){
  * @return int
  */
 function juegosGanadosPorSimbolo($juego,$simbolo){
-    // INT: k, countGanados    BOOLEAN: gano_X, gano_O
+    // INT: k     BOOLEAN: gano_X, gano_O
 
     //inicializacion de variables 
     $ganadosPorSimbolo=0;
@@ -400,7 +394,7 @@ function porcentajeGanador($juego,$simbolo){
 
 
 /**************************************INCISO11**************************************************************/
-//Muestra el listado de los jugadores ordenados alfabeticamente que eligiero el simbolo O
+//Muestra el listado de los jugadores que eligieron el simbolo O
 
 /**
  * @param array juego
@@ -413,7 +407,7 @@ function ordenarPor_O($juego){
     for($k=0; $k <count($juego); $k++){
         foreach($juego[$k] as $clave =>$dato){
             if($clave=="jugadorCirculo"){
-                $jugadoresO[$k]["jugadorO"] =$dato;
+                $jugadoresO[$k]["jugadorO"] =strtoupper($dato);
     
             }//fin if
     
@@ -424,8 +418,24 @@ function ordenarPor_O($juego){
 
     return $jugadoresO;
 
-}// fin function 
+}// fin function
+/********************************************************************************************************** */
+/** FUNCION PREDEFINIDA uasort */
+// Esta funcion ordena el array en orden alfabetico, en base a una funcion de comparación.
+// En nuestro caso lo usaremos para ordenar a los jugadores que eligieron el simbolo O
+/** 
+ * @param array nombreArray
+ * @param callback
+ * @return boolean 
+ */
 
+ //**************************************************************************************************** */
+/** FUNCION PREDEFINIDA  strtoupper */
+// Esta funcion devueve el string ingresado como parametro en mayuscula.
+/**
+ * @param string 
+ * @return string
+ */
 
 
 /**************************************INCISO12**************************************************************/
@@ -434,8 +444,10 @@ function ordenarPor_O($juego){
 /**************************************/
 
 //Declaración de variables:
-// ARRAY: juegos, datos  INT: opcion, numJuegox, ptosAcumulados   FLOAT: porcentajeGanador
-// BOOLEAN:   STRING: nombreJugador
+// ARRAY: juegos, juegoTateti, datos, a, b, jugadoresCirculo     
+// INT: opcion, numJuegox, nroJuego, ptosAcumulados  
+// FLOAT: porcentajeGanador
+// BOOLEAN:   STRING: nombreJugador, ganoSimbolo, opcionSimbolo
 
 //Inicialización de variables:
 $juegos=cargarJuegos(); 
