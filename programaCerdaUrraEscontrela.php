@@ -11,13 +11,10 @@ include_once("tateti.php");
 * Usuario GitHub: manuescontrela
 *******************
 * Cerda Marcos 
-<<<<<<< HEAD
 * Legajo: FAI-3717
 * mail: marcos.cerda@est.fi.uncoma.ar
-=======
 * Legajo: FAI-3517
 * mail:  marcos.cerda@est.fi.uncoma.edu.ar
->>>>>>> 5dfb12f5ac7d3413246dda504c4d8d736f2c6b5c
 * Usuario GitHUb: Amadesx
 *******************
 * Urra Juan Pablo
@@ -51,7 +48,21 @@ function cargarJuegos (){
     $coleccionJuegos[7] =array ("jugadorCruz"=> "jose" , "jugadorCirculo" => "juan", "puntosCruz"=> 6, "puntosCirculo" => 0);
     $coleccionJuegos[8] =array ("jugadorCruz"=> "laura" , "jugadorCirculo" => "ramon", "puntosCruz"=> 0, "puntosCirculo" => 5);
     $coleccionJuegos[9] =array ("jugadorCruz"=> "carlo" , "jugadorCirculo" => "juan", "puntosCruz"=> 0, "puntosCirculo" => 5);
-    
+    $coleccionJuegos = [];
+
+$jg1 = ["jugadorCruz" => "AMARILIS", "jugadorCirculo" => "MILOS",    "puntosCruz" => 1, "puntosCirculo" => 1];
+$jg2 = ["jugadorCruz" => "ZENDA",    "jugadorCirculo" => "AMARILIS", "puntosCruz" => 3, "puntosCirculo" => 0];
+$jg3 = ["jugadorCruz" => "ZENDA",    "jugadorCirculo" => "MILOS",    "puntosCruz" => 0, "puntosCirculo" => 4];
+$jg4 = ["jugadorCruz" => "CALIXTO",  "jugadorCirculo" => "TRUMAN",   "puntosCruz" => 1, "puntosCirculo" => 1];
+$jg5 = ["jugadorCruz" => "AMARILIS", "jugadorCirculo" => "MILOS",    "puntosCruz" => 5, "puntosCirculo" => 0];
+$jg6 = ["jugadorCruz" => "FEDORA",   "jugadorCirculo" => "CALIXTO",  "puntosCruz" => 0, "puntosCirculo" => 3];
+$jg7 = ["jugadorCruz" => "TRUMAN",   "jugadorCirculo" => "AMARILIS", "puntosCruz" => 4, "puntosCirculo" => 0];
+$jg8 = ["jugadorCruz" => "CALIXTO",  "jugadorCirculo" => "TRUMAN",   "puntosCruz" => 1, "puntosCirculo" => 1];
+$jg9 = ["jugadorCruz" => "TRUMAN",   "jugadorCirculo" => "FEDORA",   "puntosCruz" => 2, "puntosCirculo" => 0];
+$jg10= ["jugadorCruz" => "MILOS",    "jugadorCirculo" => "ZENDA",   "puntosCruz" => 1, "puntosCirculo" => 1];
+
+array_push($coleccionJuegos, $jg1, $jg2, $jg3, $jg4, $jg5, $jg6, $jg7, $jg8, $jg9, $jg10);
+
     return $coleccionJuegos;
     }
     
@@ -96,31 +107,29 @@ function seleccionarOpcion(){
 function mostrarJuegox($numJuego,$game){
 // STRING: winner
 echo "MOSTRAR JUEGO \n";
-
-
-
-    if ($game[$numJuego]["puntosCruz"] > $game[$numJuego]["puntosCirculo"]){
+ 
+    if ($game[$numJuego-1]["puntosCruz"] > $game[$numJuego-1]["puntosCirculo"]){
         $winner = " (GANÓ X)";
         echo"****************************\n";
         echo"Juego Tateti n°". $numJuego. $winner. "\n";
-        echo"Jugador X ". $game[$numJuego]["jugadorCruz"]." obtuvo ". $game[$numJuego]["puntosCruz"]."\n";
-        echo"Jugador 0 ". $game[$numJuego]["jugadorCirculo"]." obtuvo ". $game[$numJuego]["puntosCirculo"]."\n";
+        echo"Jugador X ". $game[$numJuego-1]["jugadorCruz"]." obtuvo ". $game[$numJuego-1]["puntosCruz"]."\n";
+        echo"Jugador 0 ". $game[$numJuego-1]["jugadorCirculo"]." obtuvo ". $game[$numJuego-1]["puntosCirculo"]."\n";
         echo"****************************\n";
     }
-    elseif($game[$numJuego]["puntosCruz"] < $game[$numJuego]["puntosCirculo"]){
+    elseif($game[$numJuego-1]["puntosCruz"] < $game[$numJuego-1]["puntosCirculo"]){
         $winner = " (GANÓ O)";
         echo"****************************\n";
         echo"Juego Tateti n°". $numJuego. $winner. "\n";
-        echo"Jugador X ". $game[$numJuego]["jugadorCruz"]." obtuvo ". $game[$numJuego]["puntosCruz"]."\n";
-        echo"Jugador 0 ". $game[$numJuego]["jugadorCirculo"]." obtuvo ". $game[$numJuego]["puntosCirculo"]."\n";
+        echo"Jugador X ". $game[$numJuego-1]["jugadorCruz"]." obtuvo ". $game[$numJuego-1]["puntosCruz"]."\n";
+        echo"Jugador 0 ". $game[$numJuego-1]["jugadorCirculo"]." obtuvo ". $game[$numJuego-1]["puntosCirculo"]."\n";
         echo"****************************\n";
     }
-    elseif($game[$numJuego]["puntosCruz"] == $game[$numJuego]["puntosCirculo"]){
+    elseif($game[$numJuego-1]["puntosCruz"] == $game[$numJuego-1]["puntosCirculo"]){
         $winner = " (EMPATE)";
         echo"****************************\n";
         echo"Juego Tateti n°". $numJuego. $winner. "\n";
-        echo"Jugador X ". $game[$numJuego]["jugadorCruz"]." obtuvo ". $game[$numJuego]["puntosCruz"]."\n";
-        echo"Jugador 0 ". $game[$numJuego]["jugadorCirculo"]." obtuvo ". $game[$numJuego]["puntosCirculo"]."\n";
+        echo"Jugador X ". $game[$numJuego-1]["jugadorCruz"]." obtuvo ". $game[$numJuego-1]["puntosCruz"]."\n";
+        echo"Jugador 0 ". $game[$numJuego-1]["jugadorCirculo"]." obtuvo ". $game[$numJuego-1]["puntosCirculo"]."\n";
         echo"****************************\n";
     }
     else
@@ -156,24 +165,24 @@ function primerJuegoGanado($juego, $nombreJugador){
     // inicializacion de variables
     $indice = -1; // en caso que no gane el jugador  
 
-    for($i = 0; $i < count($juego); $i++) { // recorrido por indice de un array multidimensional
+    for($i =0; $i < count($juego); $i++) { // recorrido por indice de un array multidimensional
             foreach($juego[$i] as $key => $value){ // recorre cada juego del array       
                 $bandera=true;
-                $seEncontro=($nombreJugador==$value); // determina si se encontro el jugador con ese nombre
+                $seEncontro=(strtoupper($nombreJugador)==strtoupper($value)); // determina si se encontro el jugador con ese nombre
                 $esJugadorX=($key=="jugadorCruz"); // determina si el jugador eligio X u O 
                 $ganoX=$juego[$i]["puntosCruz"] > $juego[$i]["puntosCirculo"];
                 $empatoX=$juego[$i]["puntosCruz"] == $juego[$i]["puntosCirculo"];
                 while($seEncontro && $bandera){ // recorrido parcial del array
                     if($esJugadorX){
                         if($ganoX){
-                            $indice=$i;
+                            $indice=$i+1;
         
                         }
         
                     }//fin if
                     else{
                         if(!$ganoX && !$empatoX){
-                            $indice=$i;
+                            $indice=$i+1;
         
                         }
                          
@@ -240,7 +249,7 @@ $ptosEmpate=0;
 $cantJuegoGanado=0;
 $cantPerdidos=0;
 $resumen=array(); 
-for ($k=0; $k < count($juego); $k++){
+for ($k=0; $k <count($juego); $k++){
     foreach($juego[$k] as $clave => $valor){
         $bandera = true;
     while($valor == $name && $bandera){
@@ -354,7 +363,7 @@ function juegosGanadosPorSimbolo($juego,$simbolo){
     //inicializacion de variables 
     $ganadosPorSimbolo=0;
 
-    for($k=0; $k < count($juego); $k++){
+    for($k=0; $k <count($juego); $k++){
         $gano_X=$juego[$k]["puntosCruz"] > $juego[$k]["puntosCirculo"];
         $gano_O=$juego[$k]["puntosCruz"] < $juego[$k]["puntosCirculo"];
         if(strtoupper($simbolo)=="X"){
@@ -411,7 +420,7 @@ function ordenarPor_O($juego){
     for($k=0; $k <count($juego); $k++){
         foreach($juego[$k] as $clave =>$dato){
             if($clave=="jugadorCirculo"){
-                $jugadoresO[$k]["jugadorO"] =strtoupper($dato);
+                $jugadoresO[$k]["jugadorCirculo"] =strtoupper($dato);
     
             }//fin if
     
@@ -419,7 +428,7 @@ function ordenarPor_O($juego){
         
     
     }// fin for
-
+    
     return $jugadoresO;
 
 }// fin function
@@ -471,27 +480,30 @@ case 1:
     echo "JUGAR TATETI \n";
     $juegoTateti=jugar(); 
     array_push($juegos,$juegoTateti); 
-        //print_r($juegos); 
+        print_r($juegos); 
         break;
 case 2: 
 
     echo "Ingrese número del juego que desea mostrar: \n" ;
-    $numJuegox = trim(fgets(STDIN));
-    mostrarJuegox($numJuegox,$juegos);
+    //$numJuegox = trim(fgets(STDIN)); ver si juego primero y despues ver el ultimo juego para saber si lo actualiza
+    $max=count($juegos);
+    $min=1;
+    $nroJuego =solicitarNumeroEntre($min,$max); 
+    mostrarJuegox($nroJuego,$juegos);
 
 
         break;
 case 3:
     echo "MOSTRAR EL PRIMER JUEGO GANADOR \n";
     echo("Ingrese el nombre del jugador: \n");
-    $nombreJugador=trim(fgets(STDIN)); 
+    $nombreJugador=strtoupper(trim(fgets(STDIN))); 
     $nroJuego=primerJuegoGanado($juegos,$nombreJugador);
     if($nroJuego<>-1){
-    $ganoSimbolo=simboloGanador($juegos, $nroJuego);
+    $ganoSimbolo=simboloGanador($juegos,$nroJuego-1);
     echo("****************************************\n");
-    echo("Juego TATETI: ".$nroJuego." (ganó ".$ganoSimbolo.")\n");
-    echo("Jugador X: ".$juegos[$nroJuego]["jugadorCruz"]." obtuvo ".$juegos[$nroJuego]["puntosCruz"]." puntos\n");
-    echo("Jugador O: ".$juegos[$nroJuego]["jugadorCirculo"]." obtuvo ".$juegos[$nroJuego]["puntosCirculo"]." puntos\n");
+    echo("Juego TATETI: ".($nroJuego)." (ganó ".$ganoSimbolo.")\n");
+    echo("Jugador X: ".$juegos[$nroJuego-1]["jugadorCruz"]." obtuvo ".$juegos[$nroJuego-1]["puntosCruz"]." puntos\n");
+    echo("Jugador O: ".$juegos[$nroJuego-1]["jugadorCirculo"]." obtuvo ".$juegos[$nroJuego-1]["puntosCirculo"]." puntos\n");
     echo("****************************************");
     }// fin if 
     else{
@@ -528,15 +540,22 @@ case 6:
     echo " MOSTRAR LISTADO DE JUEGOS ORDENADO POR JUGADOR 0 (CIRCULO) \n";
     // funcion de para detrminar el orden del arreglo (ascendente / descendente)
     // en este caso lo funcion esta definida para ordenar de menor a mayor alfabeticamente
-    $a=$juegos[0];
-    $b=$juegos[1];
-    function orden($a,$b){
-        if($a==$b) return 0;
-        return($a < $b)?-1:1;
-    }// fin function 
+    // RECIBE LA COLECCION DE JUEGOS COMO PARAMETRO DE ENTRADA.  
+    //$jugadoresCirculos=ordenarPor_O($juegos);
+
     $jugadoresCirculos=ordenarPor_O($juegos);
-    //print_r($jugadoresCirculos); 
-    uasort($jugadoresCirculos,"orden");
+    function comparacion ($arr1,$arr2){
+        if($arr1["jugadorCirculo"]>$arr2["jugadorCirculo"]){
+            return 1;
+        }
+        else{
+            return -1; 
+        }
+
+    }// fin function comparacion 
+    //    uasort($juegos,"comparacion"); 
+    //    print_r($juegos);
+    uasort($jugadoresCirculos,"comparacion"); 
     print_r($jugadoresCirculos);
 
     
