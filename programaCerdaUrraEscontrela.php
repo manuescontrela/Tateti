@@ -13,8 +13,11 @@ include_once("tateti.php");
 * Cerda Marcos 
 * Legajo: FAI-3717
 * mail: marcos.cerda@est.fi.uncoma.ar
+<<<<<<< HEAD
 * Legajo: FAI-3517
 * mail:  marcos.cerda@est.fi.uncoma.edu.ar
+=======
+>>>>>>> 0cee05d70f2205b58ce36ac784e6f1f87c49d282
 * Usuario GitHUb: Amadesx
 *******************
 * Urra Juan Pablo
@@ -553,10 +556,17 @@ case 6:
         }
 
     }// fin function comparacion 
+<<<<<<< HEAD
         uasort($juegos,"comparacion");
         print_r($juegos);
     //uasort($jugadoresCirculos,"comparacion"); 
     //print_r($jugadoresCirculos);
+=======
+    //    uasort($juegos,"comparacion"); 
+    //    print_r($juegos);
+    uasort($jugadoresCirculos,"comparacion"); 
+    print_r($jugadoresCirculos);
+>>>>>>> 0cee05d70f2205b58ce36ac784e6f1f87c49d282
 
     
         break;
