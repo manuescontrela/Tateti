@@ -553,7 +553,7 @@ case 6:
         }
 
     }// fin function comparacion 
-        uasort($juegos,"comparacion"); 
+        uasort($juegos,"comparacion");
         print_r($juegos);
     //uasort($jugadoresCirculos,"comparacion"); 
     //print_r($jugadoresCirculos);
